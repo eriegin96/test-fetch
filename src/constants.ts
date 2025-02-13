@@ -26,7 +26,7 @@ export const MARK_START_Y =
   PIN_LINES * PIN_GAP + PIN_LINES * PIN_SIZE + MARK_GAP_TO_PIN;
 export const MARK_GAP = 10;
 export const MARK_WIDTH = PIN_GAP - MARK_GAP / 2;
-export const MARK_HEIGHT = 20;
+export const MARK_HEIGHT = 30;
 export const MARK_LABEL = "mark";
 
 export const MARK_VALUES: Record<string, TMarkUI> = {

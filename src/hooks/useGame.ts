@@ -91,9 +91,7 @@ export const useGame = () => {
                       id: prev.length + 1,
                       content: m.content,
                       color: m.color,
-                      body: bodyB,
                       value: m.value,
-                      isScored: true,
                     },
                     ...prev,
                   ];
@@ -115,9 +113,7 @@ export const useGame = () => {
                       id: prev.length + 1,
                       content: m.content,
                       color: m.color,
-                      body: bodyA,
                       value: m.value,
-                      isScored: true,
                     },
                     ...prev,
                   ];
@@ -159,12 +155,10 @@ export const useGame = () => {
           setMarks((prev) =>
             prev.map((m) => (m.id === bodyB.id ? { ...m, isHit: false } : m))
           );
-          // setScoreStack((prev) => prev.map((s) => ({ ...s, isScored: false })));
         } else if (bodyB.label === BALL_LABEL && bodyA.label === MARK_LABEL) {
           setMarks((prev) =>
             prev.map((m) => (m.id === bodyA.id ? { ...m, isHit: false } : m))
           );
-          // setScoreStack((prev) => prev.map((s) => ({ ...s, isScored: false })));
         }
       });
 

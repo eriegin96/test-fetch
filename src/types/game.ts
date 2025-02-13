@@ -29,9 +29,7 @@ export type TMark = {
 
 export type TScore = {
   id: number;
-  body: Body;
   content: string;
   color: string;
   value: number;
-  isScored: boolean;
 };

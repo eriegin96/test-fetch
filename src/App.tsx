@@ -32,8 +32,8 @@ function App() {
         )
       )}
       <div className="score-stack">
-        {scoreStack.map(({ id, content, color, isScored }) => (
-          <Score key={id} content={content} color={color} isScored={isScored} />
+        {scoreStack.map(({ id, content, color }, index) => (
+          <Score key={id} index={index} content={content} color={color} />
         ))}
       </div>
     </div>

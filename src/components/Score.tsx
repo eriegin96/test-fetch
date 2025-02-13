@@ -2,16 +2,16 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 
 type TScoreProps = {
+  index: number;
   content: string;
   color: string;
-  isScored: boolean;
 };
 
-export const Score = ({ color, content, isScored }: TScoreProps) => {
-  const [isDown, setIsDown] = useState(isScored);
+export const Score = ({ color, content, index }: TScoreProps) => {
+  const [isDown, setIsDown] = useState(true);
 
   useEffect(() => {
-    if (isScored) setIsDown(true);
+    setIsDown(true);
 
     const timeout = setTimeout(() => {
       setIsDown(false);
@@ -20,7 +20,7 @@ export const Score = ({ color, content, isScored }: TScoreProps) => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [isScored]);
+  }, [index]);
 
   return (
     <div
