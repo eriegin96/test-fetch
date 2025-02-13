@@ -1,3 +1,7 @@
+:root {
+  --stack-width: 60px;
+}
+
 #root {
   width: 100%;
   height: 100vh;
@@ -76,14 +80,14 @@
   border-radius: 4px;
   top: 20%;
   right: 0;
-  width: 60px;
-  height: 240px;
+  width: var(--stack-width);
+  height: calc(4 * var(--stack-width));
   overflow: hidden;
 }
 
 .score {
-  width: 60px;
-  min-height: 60px;
+  width: var(--stack-width);
+  min-height: var(--stack-width);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,11 +97,19 @@
 }
 
 .score--slide-down {
-  animation: slide-down 100ms linear;
+  animation: slide-down 300ms linear;
 }
 
 @keyframes slide-down {
   from {
-    transform: translateY(-60px);
+    transform: translateY(calc(-1 * (var(--stack-width))));
   }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* * comment these lines to show render */
+canvas {
+  display: none;
 }

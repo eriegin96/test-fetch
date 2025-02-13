@@ -7,27 +7,24 @@ type TScoreProps = {
   isScored: boolean;
 };
 
-export const Score = ({
-  color,
-  content,
-  isScored: isScoredDefault,
-}: TScoreProps) => {
-  const [isScored, setIsScored] = useState(isScoredDefault);
+export const Score = ({ color, content, isScored }: TScoreProps) => {
+  const [isDown, setIsDown] = useState(isScored);
 
   useEffect(() => {
-    setIsScored(true);
+    if (isScored) setIsDown(true);
+
     const timeout = setTimeout(() => {
-      setIsScored(false);
+      setIsDown(false);
     }, 300);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [isScoredDefault]);
+  }, [isScored]);
 
   return (
     <div
-      className={clsx("score", isScored && "score--slide-down")}
+      className={clsx("score", isDown && "score--slide-down")}
       style={{ backgroundColor: color }}
     >
       {content}

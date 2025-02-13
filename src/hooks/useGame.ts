@@ -30,27 +30,9 @@ export const useGame = () => {
   const [marks, setMarks] = useState<TMark[]>([]);
   const [scoreStack, setScoreStack] = useState<TScore[]>([]);
 
-  const clearPinHit = (id: number) => {
-    setPins((prev) => {
-      const selectedPinIndex = prev.findIndex((p) => p.id === id);
-      prev[selectedPinIndex].isHit = false;
-
-      return prev;
-    });
-  };
-
-  const clearMarkHit = (id: number) => {
-    setMarks((prev) => {
-      const selectedMarkIndex = prev.findIndex((p) => p.id === id);
-      prev[selectedMarkIndex].isHit = false;
-
-      return prev;
-    });
-  };
-
   useEffect(() => {
     // create an engine
-    const engine = Engine.create();
+    const engine = Engine.create({ gravity: { x: 0, y: 1.2 } });
 
     // create a renderer
     const render = Render.create({
@@ -168,6 +150,44 @@ export const useGame = () => {
       });
     });
 
+    // clear animation state
+    Events.on(engine, "collisionEnd", (event) => {
+      const pairs = event.pairs;
+
+      pairs.forEach(({ bodyA, bodyB }) => {
+        if (bodyA.label === BALL_LABEL && bodyB.label === MARK_LABEL) {
+          setMarks((prev) =>
+            prev.map((m) => (m.id === bodyB.id ? { ...m, isHit: false } : m))
+          );
+          // setScoreStack((prev) => prev.map((s) => ({ ...s, isScored: false })));
+        } else if (bodyB.label === BALL_LABEL && bodyA.label === MARK_LABEL) {
+          setMarks((prev) =>
+            prev.map((m) => (m.id === bodyA.id ? { ...m, isHit: false } : m))
+          );
+          // setScoreStack((prev) => prev.map((s) => ({ ...s, isScored: false })));
+        }
+      });
+
+      // Handle pin glow
+      pairs.forEach(({ bodyA, bodyB }) => {
+        if (bodyA.label === BALL_LABEL && bodyB.label === PIN_LABEL) {
+          setPins((prev) =>
+            prev.map((p) => {
+              if (p.id === bodyB.id) return { ...p, isHit: false };
+              return p;
+            })
+          );
+        } else if (bodyB.label === BALL_LABEL && bodyA.label === PIN_LABEL) {
+          setPins((prev) =>
+            prev.map((p) => {
+              if (p.id === bodyA.id) return { ...p, isHit: false };
+              return p;
+            })
+          );
+        }
+      });
+    });
+
     const timeScaleTarget = 1;
     let ballCount = 0,
       lastTime = Common.now();
@@ -182,7 +202,7 @@ export const useGame = () => {
         ballCount;
 
       if (ballCount <= BALL_AMOUNT) {
-        // every 1.5 sec (real time)
+        // every 1 sec (real time)
         if (Common.now() - lastTime >= 1000) {
           // spawn Ball
           const newBall = spawnBall();
@@ -227,5 +247,5 @@ export const useGame = () => {
     };
   }, []);
 
-  return { balls, pins, marks, scoreStack, clearPinHit, clearMarkHit };
+  return { balls, pins, marks, scoreStack };
 };

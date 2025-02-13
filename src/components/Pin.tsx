@@ -3,28 +3,25 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 
 type TPinProps = {
-  id: number;
   size: number;
   position: Matter.Vector;
   isHit: boolean;
-  clearHit: (id: number) => void;
 };
 
-export function Pin({ id, position, size, isHit, clearHit }: TPinProps) {
+export function Pin({ position, size, isHit }: TPinProps) {
   const [isGlow, setIsGlow] = useState(isHit);
 
   useEffect(() => {
     if (isHit) setIsGlow(true);
+
     const timeout = setTimeout(() => {
       setIsGlow(false);
-      clearHit(id);
     }, 300);
-    clearHit(id);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [id, isHit, clearHit]);
+  }, [isHit]);
 
   return (
     <div
@@ -36,6 +33,6 @@ export function Pin({ id, position, size, isHit, clearHit }: TPinProps) {
         top: position.y,
         left: position.x,
       }}
-    ></div>
+    />
   );
 }

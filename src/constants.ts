@@ -7,8 +7,8 @@ export const WORLD_WIDTH = 800;
 export const START_PINS = 3;
 export const PIN_LINES = 8;
 export const PIN_SIZE = 8;
-export const PIN_RESTITUTION = 0.5;
-export const PIN_FRICTION = 0.05;
+export const PIN_RESTITUTION = 0.6;
+export const PIN_FRICTION = 0.06;
 export const PIN_GAP = 52;
 export const PIN_LABEL = "pin";
 

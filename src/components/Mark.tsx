@@ -3,7 +3,6 @@ import { Body } from "matter-js";
 import { useEffect, useState } from "react";
 
 type TMarkProps = {
-  id: number;
   width: number;
   height: number;
   content: string;
@@ -11,33 +10,28 @@ type TMarkProps = {
   color: string;
   body: Body;
   isHit: boolean;
-  clearHit: (id: number) => void;
 };
 
 export function Mark({
-  id,
   width,
   height,
   body,
   color,
   content,
   isHit,
-  clearHit,
 }: TMarkProps) {
   const [isDown, setIsDown] = useState(isHit);
 
   useEffect(() => {
     if (isHit) setIsDown(true);
+
     const timeout = setTimeout(() => {
       setIsDown(false);
-      clearHit(id);
     }, 300);
-    clearHit(id);
-
     return () => {
       clearTimeout(timeout);
     };
-  }, [id, isHit, clearHit]);
+  }, [isHit]);
 
   return (
     <div
