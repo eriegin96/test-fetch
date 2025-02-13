@@ -1,6 +1,7 @@
 import { Bodies, Body } from "matter-js";
 import {
   BALL_AMOUNT,
+  BALL_FRICTION,
   BALL_LABEL,
   BALL_RESTITUTION,
   BALL_SIZE,
@@ -13,9 +14,10 @@ export const spawnBalls = () => {
   const ballList: Body[] = [];
 
   for (let i = 0; i < BALL_AMOUNT; i++) {
-    const xPosition = WORLD_WIDTH / 2 + randomMinMax(-PIN_GAP, PIN_GAP);
+    const xPosition = WORLD_WIDTH / 2 + randomMinMax(-PIN_GAP - 5, PIN_GAP + 5);
     const ball = Bodies.circle(xPosition, 0, BALL_SIZE, {
       restitution: BALL_RESTITUTION,
+      friction: BALL_FRICTION,
       label: BALL_LABEL,
     });
 
@@ -23,4 +25,13 @@ export const spawnBalls = () => {
   }
 
   return ballList;
+};
+
+export const spawnBall = () => {
+  const xPosition = WORLD_WIDTH / 2 + randomMinMax(-PIN_GAP - 5, PIN_GAP + 5);
+  return Bodies.circle(xPosition, 0, BALL_SIZE, {
+    restitution: BALL_RESTITUTION,
+    friction: BALL_FRICTION,
+    label: BALL_LABEL,
+  });
 };

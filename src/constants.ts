@@ -5,19 +5,21 @@ export const WORLD_WIDTH = 800;
 export const START_PINS = 3;
 export const PIN_LINES = 8;
 export const PIN_SIZE = 8;
-export const PIN_GAP = 55;
+export const PIN_RESTITUTION = 0.5;
+export const PIN_FRICTION = 0.05;
+export const PIN_GAP = 52;
 export const PIN_LABEL = "pin";
 
 // Balls
-export const BALL_AMOUNT = 24;
+export const BALL_AMOUNT = 50;
 export const BALL_SIZE = 12;
-export const BALL_RESTITUTION = 0.75;
+export const BALL_RESTITUTION = 0.7;
+export const BALL_FRICTION = 0.04;
 export const BALL_LABEL = "ball";
 
 // Marks
 export const MARK_GAP_TO_PIN = 30;
-export const MARK_START_X =
-  WORLD_WIDTH / 2 - ((START_PINS + PIN_LINES - 2) * PIN_GAP) / 2;
+export const MARK_START_X = WORLD_WIDTH / 2 - (PIN_LINES * PIN_GAP) / 2;
 export const MARK_START_Y =
   PIN_LINES * PIN_GAP + PIN_LINES * PIN_SIZE + MARK_GAP_TO_PIN;
 export const MARK_GAP = 10;

@@ -1,8 +1,10 @@
 import { Bodies, Body } from "matter-js";
 import {
+  PIN_FRICTION,
   PIN_GAP,
   PIN_LABEL,
   PIN_LINES,
+  PIN_RESTITUTION,
   PIN_SIZE,
   START_PINS,
   WORLD_WIDTH,
@@ -14,7 +16,7 @@ export const spawnPins = () => {
   // create lines
   for (let l = 0; l < PIN_LINES; l++) {
     const linePinAmount = START_PINS + l;
-    const lineWidth = linePinAmount * PIN_GAP;
+    const lineWidth = (linePinAmount - 1) * PIN_GAP;
 
     // create pins for each line
     for (let p = 0; p < linePinAmount; p++) {
@@ -24,6 +26,8 @@ export const spawnPins = () => {
         PIN_SIZE,
         {
           isStatic: true,
+          restitution: PIN_RESTITUTION,
+          friction: PIN_FRICTION,
           label: PIN_LABEL,
         }
       );
