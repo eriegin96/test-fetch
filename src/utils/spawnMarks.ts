@@ -4,15 +4,15 @@ import {
   MARK_LABEL,
   MARK_START_X,
   MARK_START_Y,
-  MARK_LIST,
   MARK_WIDTH,
   PIN_GAP,
 } from "../constants";
+import { TMarkUI } from "../types/game";
 
-export const spawnMarks = () => {
+export const spawnMarks = (list: TMarkUI[]) => {
   const markList: Body[] = [];
 
-  for (let m = 0; m < MARK_LIST.length; m++) {
+  for (let m = 0; m < list.length; m++) {
     const mark = Bodies.rectangle(
       MARK_START_X + PIN_GAP * m,
       MARK_START_Y,
